@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Class Grader</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="./newClass.js"></script>
+    <script src="../global/global.js"></script>
+
+    <link rel="stylesheet" href="./newClass.css">
+    <link rel="stylesheet" href="../global/global.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+</head>
+
+<body>
+    <!-- Logged In Header -->
+    <div id="nav-container">
+        <nav id="nav-bar">
+            <a href="/index"><img id="nav-logo" src="../global/logo.png"></a>
+            
+            <a class="nav-element1" href="/index">
+                Home
+            </a>
+            <a class="nav-element1" href="/findClasses">
+                Search Classes
+            </a>
+            <a class="nav-element1" href="/newClass">
+                New Class
+            </a>
+
+            <a class="nav-element3" onclick="logout()">
+                Logout
+            </a>
+            <a class="nav-element2" href="/profile">
+                Profile
+            </a>
+        </nav>
+    </div>
+
+    <div id="page-content">
+        <form id="new-form" onsubmit="return false">
+            <h2 id="new-header">Create A New Class</h2>
+
+            <input type="text" class="text-form"" id="school-input" placeholder="School Name">
+            <p id="school-tooltip" style="visibility: hidden">
+                School name cannot be blank!
+            </p> <br><br>
+
+            <input type="text" class="text-form" id="class-input" placeholder="Class Name">
+            <p id="class-tooltip" style="visibility: hidden">
+                Class name cannot be blank!
+            </p>
+
+            <input type="text" class="text-form" id="teacher-input" placeholder="Teacher Name">
+            <p id="teacher-tooltip" style="visibility: hidden">
+                Teacher name cannot be blank!
+            </p>
+
+            <button id="new-submit" type="submit" onclick="create()">Create</button>
+        </form>
+    </div>
+
+
+    <!-- Footer -->
+    <footer id="footer">
+
+    </footer>
+</body>
+
+</html>

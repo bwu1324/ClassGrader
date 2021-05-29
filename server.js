@@ -99,11 +99,17 @@ app.set('view engine', 'ejs')
 app.use(express.static('./assets'))
 app.use(cookieParser())
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 
 // homepage
-app.get('/index/', (req, res) => {
-    res.render('index')
+app.get('/index', async (req, res) => {
+    // check if user has valid session cookie, redirect to profile if yes
+    const user = await authUser(req.cookies.session)
+    if (user) { res.render('index-loggedin') }
+
+    // otherwise, render page
+    else { res.render('index') }
 })
 
 app.get('/signup', async (req, res) => {
@@ -142,6 +148,47 @@ app.get('/profile', async (req, res) => {
     else { res.redirect('login') }
 })
 
+app.get('/findClasses', async (req, res) => {
+    var found = []
+    var search = false
+    if (req.query.school) {
+        search = true
+        var classes = fs.readdirSync('./classes')
+        for (let i = 0; i < classes.length; i++) {
+            var thisClass = fs.readFileSync('./classes/' + classes[i])
+
+            if (thisClass.school === req.query.school) {
+                found.push(thisClass)
+            }
+        }
+
+        if (req.query.class) {
+            for (let i = 0; i < found.length; i++) {
+                if (req.query.class !== found.className) {
+                    found.splice(i, 1)
+                }
+            }
+        }
+    }
+    // check if user has valid session cookie, redirect to profile if yes
+    const user = await authUser(req.cookies.session)
+    if (user) { res.render('findClasses-loggedin', { found: found, search: req.query }) }
+
+    // otherwise, render page
+    else { res.render('findClasses', { found: found, search: req.query}) }
+})
+
+app.get('/newClass', async (req, res) => {
+    // check if user has valid session cookie
+    const user = await authUser(req.cookies.session)
+    if (user) { 
+        console.log(user)
+        res.render('newClass') 
+    }
+
+    // otherwise, redirect page
+    else { res.redirect('../login') }
+})
 
 // login form post req
 app.post('/login', async (req, res) => {

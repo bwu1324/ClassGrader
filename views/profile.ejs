@@ -2,9 +2,11 @@
 <html lang="en">
 
 <head>
-    <title>Class Grader - Login</title>
+    <title>Class Grader - <%-user.username%>'s Profile</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="../global/global.js"></script>
 
     <link rel="stylesheet" href="./profile.css">
     <link rel="stylesheet" href="../global/global.css">
@@ -12,7 +14,7 @@
 </head>
 
 <body>
-    <!-- Header -->
+    <!-- Logged In Header -->
     <div id="nav-container">
         <nav id="nav-bar">
             <a href="/index"><img id="nav-logo" src="../global/logo.png"></a>
@@ -23,8 +25,11 @@
             <a class="nav-element1" href="/findClasses">
                 Search Classes
             </a>
+            <a class="nav-element1" href="/newClass">
+                New Class
+            </a>
 
-            <a class="nav-element3" href="/signup">
+            <a class="nav-element3" onclick="logout()">
                 Logout
             </a>
             <a class="nav-element2" href="/profile">
@@ -44,13 +49,17 @@
             <br>
         </div  >
 
-        <% for (let i = 0; i < ratings.length; i++) { %>
+        <% for (let i = ratings.length - 1; i >= 0; i--) { %>
             <div class="rating-card">
                 <div class="rating-header">
                     <h2 class="class-name"><%-ratings[i].className%></h2>
+                    <p class="school-name">at <%-ratings[i].school%></p>
                     <p class="teacher-name">Teacher: <%-ratings[i].teacher%></p>
+                    <p class="date"><%-ratings[i].date%></p>
+                </div>
 
-                    <div class="rating-container-overall">
+                <div class="ratings">
+                    <div class="rating-container">
                         <p class="rating-label">Overall: </p>
                         <div class="rating">
                             <% for (let j = 5; j > 0; j--) { %>
@@ -62,9 +71,7 @@
                             <% } %>
                         </div>
                     </div>
-                </div>
 
-                <div class="subratings">
                     <div class="rating-container">
                         <p class="rating-label">Content: </p>
                         <div class="rating">

@@ -1,8 +1,9 @@
-#login-form {
-    margin-top: 200px;
+#search-form {
+    margin: 100px auto;
+    width: 1000px;
 }
 
-#login-header {
+#search-header {
     font-weight: 200;
     font-size: 32px;
 }
@@ -11,11 +12,6 @@
     outline: none;
     border-width: 2px;
     margin: 0px;
-}
-
-#username-tooltip, #password-tooltip {
-    color: red;
-    width: 300px;
 }
 
 .text-form {
@@ -29,7 +25,7 @@
     margin: 1px;
 }
 
-#login-submit {
+#search-submit {
     width: 100px;
     height: 40px;
     border-style: none;
