@@ -37,7 +37,7 @@ function create () {
                 document.getElementById('teacher-tooltip').textContent = "Class already exists!"
                 document.getElementById('teacher-tooltip').style.visibility = "visible"
             } else {
-                window.location.replace('/class/' + response)
+                window.location.replace('/classes/' + response)
             }
         }
     };
