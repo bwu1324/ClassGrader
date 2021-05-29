@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Class Grader - Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="./profile.css">
+    <link rel="stylesheet" href="../global/global.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="nav-container">
+        <nav id="nav-bar">
+            <a href="/index"><img id="nav-logo" src="../global/logo.png"></a>
+            
+            <a class="nav-element1" href="/index">
+                Home
+            </a>
+            <a class="nav-element1" href="/findClasses">
+                Search Classes
+            </a>
+
+            <a class="nav-element3" href="/signup">
+                Logout
+            </a>
+            <a class="nav-element2" href="/profile">
+                Profile
+            </a>
+        </nav>
+    </div>
+
+    <div id="page-content">
+        <div id="profile-card">
+            <h1><%-user.username%>'s Profile</h2>
+
+            <p>School: <%-user.school%></p>
+
+            <br><br>
+            <h2 id="reviews-header"><%-user.username%>'s Reviews</h2>
+            <br>
+        </div  >
+
+        <% for (let i = 0; i < ratings.length; i++) { %>
+            <div class="rating-card">
+                <div class="rating-header">
+                    <h2 class="class-name"><%-ratings[i].className%></h2>
+                    <p class="teacher-name">Teacher: <%-ratings[i].teacher%></p>
+
+                    <div class="rating-container-overall">
+                        <p class="rating-label">Overall: </p>
+                        <div class="rating">
+                            <% for (let j = 5; j > 0; j--) { %>
+                                <% if (j <= ratings[i].overallRating) { %>
+                                    <div class="rating-bar-dark"></div>
+                                <% } else { %>
+                                    <div class="rating-bar-light"></div>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subratings">
+                    <div class="rating-container">
+                        <p class="rating-label">Content: </p>
+                        <div class="rating">
+                            <% for (let j = 5; j > 0; j--) { %>
+                                <% if (j <= ratings[i].contentRating) { %>
+                                    <div class="rating-bar-dark"></div>
+                                <% } else { %>
+                                    <div class="rating-bar-light"></div>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="rating-container">
+                        <p class="rating-label">Homework: </p>
+                        <div class="rating">
+                            <% for (let j = 5; j > 0; j--) { %>
+                                <% if (j <= ratings[i].homeworkRating) { %>
+                                    <div class="rating-bar-dark"></div>
+                                <% } else { %>
+                                    <div class="rating-bar-light"></div>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="rating-container">
+                        <p class="rating-label">Teacher: </p>
+                        <div class="rating">
+                            <% for (let j = 5; j > 0; j--) { %>
+                                <% if (j <= ratings[i].teacherRating) { %>
+                                    <div class="rating-bar-dark"></div>
+                                <% } else { %>
+                                    <div class="rating-bar-light"></div>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="review">
+                    Review: <br>
+                    <%-ratings[i].review%>
+                </p>
+            </div>
+        <% }; %>
+    </div>
+
+
+    <!-- Footer -->
+    <footer id="footer">
+
+    </footer>
+</body>
+
+</html>

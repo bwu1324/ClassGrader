@@ -1,0 +1,80 @@
+#profile-card { 
+    margin: auto;
+    width: 1000px;
+    height: 200px;
+}
+
+.rating-card {
+    margin: 20px auto;
+    width: 1200px;
+    border-radius: 20px;
+    background-color: #b7e8c4;
+}
+
+#reviews-header {
+    text-align: center;
+}
+
+.subratings {
+    width: 100%;
+    height: 20px;
+}
+
+.review {
+    width: calc(100% - 40px);
+    margin: 0;
+    padding: 20px;
+}
+
+.rating-header {
+    width: 100%;
+    height: 70px;
+}
+
+.class-name {
+    float: left;
+    margin-left: 20px;
+}
+
+.teacher-name {
+    padding-top: 12px;
+    margin-left: 20px;
+    color: #666666;
+    float: left;
+}
+
+.rating-container {
+    margin-left: 40px;
+    margin-right: 20px;
+    float: left;
+    width: 200px;
+}
+
+.rating-container-overall {
+    float: right;
+    width: 150px;
+    margin-top: 30px;
+}
+
+.rating-label {
+    margin: 0px;
+    float: left;
+}
+
+.rating {
+    float: left;
+    width: 50px;
+}
+
+.rating-bar-dark, .rating-bar-light {
+    background-color: #222222;
+    width: 5px;
+    height: 16px;
+    float: right;
+    margin: 2px;
+    border-radius: 2px;
+}
+
+.rating-bar-light {
+    background-color: #888888;
+}

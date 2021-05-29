@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Class Grader - Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="./signup.js"></script>
+
+    <link rel="stylesheet" href="./signup.css">
+    <link rel="stylesheet" href="../global/global.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="nav-container">
+        <nav id="nav-bar">
+            <a href="/index"><img id="nav-logo" src="../global/logo.png"></a>
+            
+            <a class="nav-element1" href="/index">
+                Home
+            </a>
+            <a class="nav-element1" href="/index/#about">
+                About Us
+            </a>
+            <a class="nav-element1" href="/index/#contact">
+                Contact
+            </a>
+
+            <a class="nav-element3" href="/signup">
+                Signup
+            </a>
+            <a class="nav-element2" href="/login">
+                Login
+            </a>
+        </nav>
+    </div>
+
+    <div id="page-content">
+        <!-- Signup Form -->
+        <center>
+            <form id="signup-form" onsubmit="return false">
+                <h2 id="signup-header">Get Started With Course Grader</h2>
+
+                <input type="text" class="text-form"" id="username-input" placeholder="Username">
+
+                <p id="username-tooltip" style="visibility: hidden">
+                    Username cannot be blank!
+                </p>
+                <p></p>
+
+                <input type="password" class="text-form" id="password-input" placeholder="Password">
+                <p></p>
+
+                <input type="password" class="text-form" id="passwordConfirm-input" placeholder="Confirm Password">
+
+                <p id="password-tooltip" style="visibility: hidden">
+                    Passwords don't match!
+                </p>
+                <p></p>
+
+                <input type="text" class="text-form" id="school-input" placeholder="Your College">
+                <p></p>
+
+                <button id="signup-submit" type="submit" onclick="signup()">Signup</button>
+            </form>
+        </center>
+    </div>
+</body>
+
+</html>

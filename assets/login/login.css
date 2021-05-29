@@ -1,0 +1,60 @@
+#login-form {
+    margin-top: 200px;
+}
+
+#login-header {
+    font-weight: 200;
+    font-size: 32px;
+}
+
+.text-form:focus {
+    outline: none;
+    border-width: 2px;
+    margin: 0px;
+}
+
+#username-tooltip, #password-tooltip {
+    color: red;
+    width: 300px;
+}
+
+.text-form {
+    width: 400px;
+    height: 40px;
+    padding: 0px 20px;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 1px;
+    font-size: 18px;
+    margin: 1px;
+}
+
+#login-submit {
+    width: 100px;
+    height: 40px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: #32a852;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+#temp, #temp2 {
+    background-color: #b7e8c4;
+    padding: 10px 0px;
+    float: left;
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+#temp {
+    padding-left: 10px;
+    color: white;
+    margin-left: 100px;
+}
+
+#temp2 {
+    padding-right: 10px;
+    color: #32a852;    
+}
