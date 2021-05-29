@@ -8,6 +8,11 @@
     font-size: 32px;
 }
 
+#no-results {
+    width: 100px;
+    margin: auto;
+}
+
 .text-form:focus {
     outline: none;
     border-width: 2px;
@@ -34,4 +39,68 @@
     font-size: 18px;
     font-weight: bold;
     color: white;
+}
+
+.result {
+    width: 1000px;
+    height: 30px;
+    margin: auto;
+    background-color: #b7e8c4;
+    padding: 20px;
+    border-radius: 20px;;
+    margin-top: 30px;
+}
+
+.className {
+    font-size: 24px;
+    color: black;
+    float: left;
+}
+
+.className:hover {
+    color: #555555;
+}
+
+.school {
+    font-size: 18px;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.teacher {
+    font-size: 18px;
+    color: #666666;
+    margin-top: 5px;
+    margin-left: 30px;
+    float: left;
+}
+
+.rating-container {
+    margin-top: 5px;
+    float: right;
+    width: 170px;
+}
+
+.rating-label {
+    margin: 0px;
+    float: left;
+}
+
+.rating {
+    float: left;
+    width: 50px;
+}
+
+.rating-bar-dark, .rating-bar-light {
+    background-color: #222222;
+    width: 5px;
+    height: 16px;
+    float: right;
+    margin: 2px;
+    border-radius: 2px;
+}
+
+.rating-bar-light {
+    background-color: #888888;
 }

@@ -150,26 +150,29 @@ app.get('/profile', async (req, res) => {
 
 app.get('/findClasses', async (req, res) => {
     var found = []
-    var search = false
     if (req.query.school) {
-        search = true
         var classes = fs.readdirSync('./classes')
         for (let i = 0; i < classes.length; i++) {
-            var thisClass = fs.readFileSync('./classes/' + classes[i])
+            var thisClass = JSON.parse(fs.readFileSync('./classes/' + classes[i]))
 
             if (thisClass.school === req.query.school) {
+                thisClass.link = classes[i].slice(0, -5)
                 found.push(thisClass)
             }
         }
 
         if (req.query.class) {
-            for (let i = 0; i < found.length; i++) {
-                if (req.query.class !== found.className) {
-                    found.splice(i, 1)
+            var count = 0
+            while (count < found.length) {
+                if (req.query.class !== found[count].className) {
+                    found.splice(count, 1)
+                } else {
+                    count++
                 }
             }
         }
     }
+
     // check if user has valid session cookie, redirect to profile if yes
     const user = await authUser(req.cookies.session)
     if (user) { res.render('findClasses-loggedin', { found: found, search: req.query }) }
@@ -181,13 +184,10 @@ app.get('/findClasses', async (req, res) => {
 app.get('/newClass', async (req, res) => {
     // check if user has valid session cookie
     const user = await authUser(req.cookies.session)
-    if (user) { 
-        console.log(user)
-        res.render('newClass') 
-    }
+    if (user) { res.render('newClass') }
 
     // otherwise, redirect page
-    else { res.redirect('../login') }
+    else { res.redirect('/login') }
 })
 
 // login form post req
@@ -222,7 +222,6 @@ app.post('/signup', (req, res) => {
     // grab the data
     const data = req.body
 
-    console.log(data)
     // read the file, if error, it doesn't exist, new user can be created
     fs.access('./userData/' + data.username + '.json', async (err) => {
         if (err) {
@@ -253,6 +252,36 @@ app.post('/signup', (req, res) => {
         } else { res.send('exists') } // file could be read, therefore user alread exists, new user cannot be created
     })
 })
+
+// signup form post req
+app.post('/newClass', (req, res) => {
+    // grab the data
+    const data = req.body
+
+    var classID = sha(data.school + data.class + data.teacher)
+    // read the file, if error, it doesn't exist, new user can be created
+    fs.access('./classes/' + classID + '.json', async (err) => {
+        if (err) {
+            var newClass = {
+                school: data.school,
+                className: data.class,
+                teacher: data.teacher,
+                ratings: [],
+                rating: 0
+            }
+
+            fs.writeFile('./classes/' + classID + '.json', JSON.stringify(newClass), (error) => {
+                if (error) {
+                    res.send('fail')
+                    return
+                }
+
+                res.send(classID)
+            })
+        } else { res.send('exists') } // file could be read, therefore user alread exists, new user cannot be created
+    })
+})
+
 
 // new rating post req
 app.post('/:class/newRating', (req, res) => {

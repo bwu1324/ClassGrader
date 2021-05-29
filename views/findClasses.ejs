@@ -40,14 +40,40 @@
 
     <div id="page-content">
         <form id="search-form" onsubmit="return false">
-            <h2 id="search-header">Search</h2>
+            <h2 id="search-header">Search Classes</h2>
 
             <input type="text" class="text-form"" id="school-input" placeholder="School" <% if (search.school) { %> value="<%-search.school%>" <% } %>>
             <input type="text" class="text-form" id="class-input" placeholder="Class Name" <% if (search.class) { %> value="<%-search.class%>" <% } %>>
 
             <button id="search-submit" type="submit" onclick="search()">Search</button>
         </form>
-    </div>
+
+        <div id="search-results">
+            <% for (let i = 0; i < found.length; i++) { %>
+                <div class="result">
+                    <a class="className" href="/classes/<%- found[i].link %>"><%- found[i].className %></a>
+                    <p class="school">at <%- found[i].school %></p>
+                    <p class="teacher">Teacher: <%- found[i].teacher %></p>
+
+                    <div class="rating-container">
+                        <p class="rating-label">Average Rating: </p>
+                        <div class="rating">
+                            <% for (let j = 5; j > 0; j--) { %>
+                                <% if (j <= found[i].rating) { %>
+                                    <div class="rating-bar-dark"></div>
+                                <% } else { %>
+                                    <div class="rating-bar-light"></div>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+
+            <% if (search.school && found.length === 0) { %>
+                <p id="no-results">No Results</p>
+            <% } %>
+        </div>
 
 
     <!-- Footer -->
