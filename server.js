@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 const crypto = require('crypto')
 const argon2 = require('argon2')
 const fs = require('fs')
-const { fork } = require('child_process')
 
 const secret = '0439868ec28dab59' //crypto.randomBytes(16)          // generate random server secret key for encrypting cookies
 
@@ -112,7 +111,7 @@ app.get('/login', async (req, res) => {
     else { res.render('login') }
 })
 
-// login page
+// profile page
 app.get('/profile', async (req, res) => {
     // check if user has valid session cookie, redirect to profile if yes
     const user = await authUser(req.cookies.session)
@@ -329,7 +328,6 @@ app.post('/classes/:id', async (req, res) => {
                 return
             }
 
-            
             data = JSON.parse(data)
 
             var newOverallRating = ((data.rating * data.ratings.length) + parseInt(req.body.overallRating)) / (data.ratings.length + 1)
