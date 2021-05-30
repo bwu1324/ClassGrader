@@ -18,7 +18,7 @@
     <div id="nav-container">
         <nav id="nav-bar">
             <a href="/index"><img id="nav-logo" src="../global/logo.png"></a>
-            
+
             <a class="nav-element1" href="/index">
                 Home
             </a>
@@ -38,93 +38,112 @@
         </nav>
     </div>
 
-    <div id="page-content">
-        <div id="profile-card">
-            <h1><%-user.username%>'s Profile</h2>
+    <div id="page-container">
+        <div id="page-content">
+            <div id="profile-card">
+                <h1><%-user.username%>'s Profile</h2>
+    
+                <p>School: <%-user.school%></p>
+    
+                <br><br>
+                <h2 id="reviews-header"><%-user.username%>'s Reviews</h2>
+                <br>
+            </div  >
+    
+            <% for (let i = ratings.length - 1; i >= 0; i--) { %>
+                <div class="rating-card">
+                    <div class="rating-header">
+                        <h2 class="class-name"><%-ratings[i].className%></h2>
+                        <p class="school-name">at <%-ratings[i].school%></p>
+                        <p class="teacher-name">Teacher: <%-ratings[i].teacher%></p>
+                        <p class="date"><%-ratings[i].date%></p>
+                    </div>
+    
+                    <div class="ratings">
+                        <div class="rating-container">
+                            <p class="rating-label">Overall: </p>
+                            <div class="rating">
+                                <% for (let j = 5; j > 0; j--) { %>
+                                    <% if (j <= ratings[i].overallRating) { %>
+                                        <div class="rating-bar-dark"></div>
+                                    <% } else { %>
+                                        <div class="rating-bar-light"></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+    
+                        <div class="rating-container">
+                            <p class="rating-label">Content: </p>
+                            <div class="rating">
+                                <% for (let j = 5; j > 0; j--) { %>
+                                    <% if (j <= ratings[i].contentRating) { %>
+                                        <div class="rating-bar-dark"></div>
+                                    <% } else { %>
+                                        <div class="rating-bar-light"></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+    
+                        <div class="rating-container">
+                            <p class="rating-label">Homework: </p>
+                            <div class="rating">
+                                <% for (let j = 5; j > 0; j--) { %>
+                                    <% if (j <= ratings[i].homeworkRating) { %>
+                                        <div class="rating-bar-dark"></div>
+                                    <% } else { %>
+                                        <div class="rating-bar-light"></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+    
+                        <div class="rating-container">
+                            <p class="rating-label">Teacher: </p>
+                            <div class="rating">
+                                <% for (let j = 5; j > 0; j--) { %>
+                                    <% if (j <= ratings[i].teacherRating) { %>
+                                        <div class="rating-bar-dark"></div>
+                                    <% } else { %>
+                                        <div class="rating-bar-light"></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <p class="review">
+                        Review: <br>
+                        <%-ratings[i].review%>
+                    </p>
+                </div>
+            <% }; %>
+        </div>
 
-            <p>School: <%-user.school%></p>
+        <!-- Footer -->
+        <footer id="footer">
+            <div id="footer-container">
+                <div id="site-index">
+                    <h5>Class Grader Site Index</h5>
 
-            <br><br>
-            <h2 id="reviews-header"><%-user.username%>'s Reviews</h2>
-            <br>
-        </div  >
-
-        <% for (let i = ratings.length - 1; i >= 0; i--) { %>
-            <div class="rating-card">
-                <div class="rating-header">
-                    <h2 class="class-name"><%-ratings[i].className%></h2>
-                    <p class="school-name">at <%-ratings[i].school%></p>
-                    <p class="teacher-name">Teacher: <%-ratings[i].teacher%></p>
-                    <p class="date"><%-ratings[i].date%></p>
+                    <a href="/index">Home</a><br>
+                    <a href="/signup">Sign Up</a><br>
+                    <a href="/login"">Login</a><br>
+                    <a href=" /profile">Profile</a><br>
+                    <a href="/findClasses">Find Class</a><br>
+                    <a href="/newClass">New Class</a><br>
                 </div>
 
-                <div class="ratings">
-                    <div class="rating-container">
-                        <p class="rating-label">Overall: </p>
-                        <div class="rating">
-                            <% for (let j = 5; j > 0; j--) { %>
-                                <% if (j <= ratings[i].overallRating) { %>
-                                    <div class="rating-bar-dark"></div>
-                                <% } else { %>
-                                    <div class="rating-bar-light"></div>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
+                <div id="contact">
+                    <h5>Contact</h5>
 
-                    <div class="rating-container">
-                        <p class="rating-label">Content: </p>
-                        <div class="rating">
-                            <% for (let j = 5; j > 0; j--) { %>
-                                <% if (j <= ratings[i].contentRating) { %>
-                                    <div class="rating-bar-dark"></div>
-                                <% } else { %>
-                                    <div class="rating-bar-light"></div>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
-
-                    <div class="rating-container">
-                        <p class="rating-label">Homework: </p>
-                        <div class="rating">
-                            <% for (let j = 5; j > 0; j--) { %>
-                                <% if (j <= ratings[i].homeworkRating) { %>
-                                    <div class="rating-bar-dark"></div>
-                                <% } else { %>
-                                    <div class="rating-bar-light"></div>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
-
-                    <div class="rating-container">
-                        <p class="rating-label">Teacher: </p>
-                        <div class="rating">
-                            <% for (let j = 5; j > 0; j--) { %>
-                                <% if (j <= ratings[i].teacherRating) { %>
-                                    <div class="rating-bar-dark"></div>
-                                <% } else { %>
-                                    <div class="rating-bar-light"></div>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
+                    <a>Email: someone@someplace.com</a>
+                    <p>Phone: 1-(800)-123-4567</p>
                 </div>
-
-                <p class="review">
-                    Review: <br>
-                    <%-ratings[i].review%>
-                </p>
             </div>
-        <% }; %>
+        </footer>
     </div>
-
-
-    <!-- Footer -->
-    <footer id="footer">
-
-    </footer>
 </body>
 
 </html>

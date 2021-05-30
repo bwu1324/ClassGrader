@@ -19,7 +19,7 @@
     <div id="nav-container">
         <nav id="nav-bar">
             <a href="/index"><img id="nav-logo" src="../global/logo.png"></a>
-            
+
             <a class="nav-element1" href="/index">
                 Home
             </a>
@@ -39,156 +39,175 @@
         </nav>
     </div>
 
-    <div id="page-content">
-        <div id="new-review">
-            <div id="review-page">
-                <button id="close-review" onclick="closeReview()">X</button>
-                <center>
-                    <form id="review-form" onsubmit="return false">
-                        <h2 id="review-header">Create New Review</h2>
-                        
-                        <label for="overall">Overall Rating: </label>
-                        <select id="overall" class="rating-select">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <br><br>
-
-                        <label for="content">Content Rating: </label>
-                        <select id="content" class="rating-select">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <label for="homework">Homework Rating: </label>
-                        <select id="homework" class="rating-select">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <label for="teacher">Teacher Rating: </label>
-                        <select id="teacher" class="rating-select">
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                        <br><br>
-                        <textarea id="review-text" cols="40" rows="5" placeholder="Write Your Review Here"></textarea>
-                        <br><br>
-
-                        <button id="review-submit" type="submit" onclick="review()">Submit Review</button>
-                    </form>
-                </center>
+    <div id="page-container">
+        <div id="page-content">
+            <div id="new-review">
+                <div id="review-page">
+                    <button id="close-review" onclick="closeReview()">X</button>
+                    <center>
+                        <form id="review-form" onsubmit="return false">
+                            <h2 id="review-header">Create New Review</h2>
+                            
+                            <label for="overall">Overall Rating: </label>
+                            <select id="overall" class="rating-select">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <br><br>
+    
+                            <label for="content">Content Rating: </label>
+                            <select id="content" class="rating-select">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <label for="homework">Homework Rating: </label>
+                            <select id="homework" class="rating-select">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <label for="teacher">Teacher Rating: </label>
+                            <select id="teacher" class="rating-select">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            <br><br>
+                            <textarea id="review-text" cols="40" rows="5" placeholder="Write Your Review Here"></textarea>
+                            <br><br>
+    
+                            <button id="review-submit" type="submit" onclick="review()">Submit Review</button>
+                        </form>
+                    </center>
+                </div>
             </div>
-        </div>
-        <div class="class-container">
-            <p class="this-class-name"><%- data.className %></p>
-            <p class="school">at <%- data.school %></p>
-            <p class="teacher">Teacher: <%- data.teacher %></p>
-
-            <button id="add-review" onclick="startReview()">Add Review</button>
-
-            <div id="average-rating-container">
-                <p class="rating-label">Average Rating: </p>
-                <div class="rating">
-                    <% for (let j = 5; j > 0; j--) { %>
-                        <% if (j <= data.rating) { %>
-                            <div class="rating-bar-dark"></div>
-                        <% } else { %>
-                            <div class="rating-bar-light"></div>
+            <div class="class-container">
+                <p class="this-class-name"><%- data.className %></p>
+                <p class="school">at <%- data.school %></p>
+                <p class="teacher">Teacher: <%- data.teacher %></p>
+    
+                <button id="add-review" onclick="startReview()">Add Review</button>
+    
+                <div id="average-rating-container">
+                    <p class="rating-label">Average Rating: </p>
+                    <div class="rating">
+                        <% for (let j = 5; j > 0; j--) { %>
+                            <% if (j <= data.rating) { %>
+                                <div class="rating-bar-dark"></div>
+                            <% } else { %>
+                                <div class="rating-bar-light"></div>
+                            <% } %>
                         <% } %>
-                    <% } %>
+                    </div>
                 </div>
             </div>
+            <hr>
+    
+            <% for (let i = ratings.length - 1; i >= 0; i--) { %>
+                <div class="rating-card">
+                    <div class="rating-header">
+                        <h2 class="user"><%-ratings[i].user%>'s Review</h2>
+                        <p class="date"><%-ratings[i].date%></p>
+                    </div>
+    
+                    <div class="ratings">
+                        <div class="rating-container">
+                            <p class="rating-label">Overall: </p>
+                            <div class="rating">
+                                <% for (let j = 5; j > 0; j--) { %>
+                                    <% if (j <= ratings[i].overallRating) { %>
+                                        <div class="rating-bar-dark"></div>
+                                    <% } else { %>
+                                        <div class="rating-bar-light"></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+    
+                        <div class="rating-container">
+                            <p class="rating-label">Content: </p>
+                            <div class="rating">
+                                <% for (let j = 5; j > 0; j--) { %>
+                                    <% if (j <= ratings[i].contentRating) { %>
+                                        <div class="rating-bar-dark"></div>
+                                    <% } else { %>
+                                        <div class="rating-bar-light"></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+    
+                        <div class="rating-container">
+                            <p class="rating-label">Homework: </p>
+                            <div class="rating">
+                                <% for (let j = 5; j > 0; j--) { %>
+                                    <% if (j <= ratings[i].homeworkRating) { %>
+                                        <div class="rating-bar-dark"></div>
+                                    <% } else { %>
+                                        <div class="rating-bar-light"></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+    
+                        <div class="rating-container">
+                            <p class="rating-label">Teacher: </p>
+                            <div class="rating">
+                                <% for (let j = 5; j > 0; j--) { %>
+                                    <% if (j <= ratings[i].teacherRating) { %>
+                                        <div class="rating-bar-dark"></div>
+                                    <% } else { %>
+                                        <div class="rating-bar-light"></div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <p class="review">
+                        <%-ratings[i].review%>
+                    </p>
+                </div>
+            <% }; %>
         </div>
-        <hr>
 
-        <% for (let i = ratings.length - 1; i >= 0; i--) { %>
-            <div class="rating-card">
-                <div class="rating-header">
-                    <h2 class="user"><%-ratings[i].user%>'s Review</h2>
-                    <p class="date"><%-ratings[i].date%></p>
+        <!-- Footer -->
+        <footer id="footer">
+            <div id="footer-container">
+                <div id="site-index">
+                    <h5>Class Grader Site Index</h5>
+
+                    <a href="/index">Home</a><br>
+                    <a href="/signup">Sign Up</a><br>
+                    <a href="/login"">Login</a><br>
+                    <a href=" /profile">Profile</a><br>
+                    <a href="/findClasses">Find Class</a><br>
+                    <a href="/newClass">New Class</a><br>
                 </div>
 
-                <div class="ratings">
-                    <div class="rating-container">
-                        <p class="rating-label">Overall: </p>
-                        <div class="rating">
-                            <% for (let j = 5; j > 0; j--) { %>
-                                <% if (j <= ratings[i].overallRating) { %>
-                                    <div class="rating-bar-dark"></div>
-                                <% } else { %>
-                                    <div class="rating-bar-light"></div>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
+                <div id="contact">
+                    <h5>Contact</h5>
 
-                    <div class="rating-container">
-                        <p class="rating-label">Content: </p>
-                        <div class="rating">
-                            <% for (let j = 5; j > 0; j--) { %>
-                                <% if (j <= ratings[i].contentRating) { %>
-                                    <div class="rating-bar-dark"></div>
-                                <% } else { %>
-                                    <div class="rating-bar-light"></div>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
-
-                    <div class="rating-container">
-                        <p class="rating-label">Homework: </p>
-                        <div class="rating">
-                            <% for (let j = 5; j > 0; j--) { %>
-                                <% if (j <= ratings[i].homeworkRating) { %>
-                                    <div class="rating-bar-dark"></div>
-                                <% } else { %>
-                                    <div class="rating-bar-light"></div>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
-
-                    <div class="rating-container">
-                        <p class="rating-label">Teacher: </p>
-                        <div class="rating">
-                            <% for (let j = 5; j > 0; j--) { %>
-                                <% if (j <= ratings[i].teacherRating) { %>
-                                    <div class="rating-bar-dark"></div>
-                                <% } else { %>
-                                    <div class="rating-bar-light"></div>
-                                <% } %>
-                            <% } %>
-                        </div>
-                    </div>
+                    <a>Email: someone@someplace.com</a>
+                    <p>Phone: 1-(800)-123-4567</p>
                 </div>
-
-                <p class="review">
-                    <%-ratings[i].review%>
-                </p>
             </div>
-        <% }; %>
+        </footer>
     </div>
-
-
-    <!-- Footer -->
-    <footer id="footer">
-
-    </footer>
 </body>
 
 </html>

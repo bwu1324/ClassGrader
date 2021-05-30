@@ -1,1 +1,1 @@
-{"username":"Test","hash":"$argon2i$v=19$m=4096,t=3,p=1$wFTAMYtb8a4TNDOJ3zTNtg$OdKKTOAlguu/XGe5gJvUXpdHEFXaDHlxG2MZBu408u4","school":"UIUC","ratings":[0,1]}
+{"username":"Test","hash":"$argon2i$v=19$m=4096,t=3,p=1$wFTAMYtb8a4TNDOJ3zTNtg$OdKKTOAlguu/XGe5gJvUXpdHEFXaDHlxG2MZBu408u4","school":"UIUC","ratings":[0,1,0,1,2,3]}

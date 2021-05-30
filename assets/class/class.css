@@ -47,8 +47,9 @@
 }
 
 #new-review {
+    z-index: 1;
     visibility: hidden;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
