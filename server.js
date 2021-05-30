@@ -8,7 +8,7 @@ const { fork } = require('child_process')
 
 const secret = '0439868ec28dab59' //crypto.randomBytes(16)          // generate random server secret key for encrypting cookies
 
-var ratingCount = 0
+var ratingCount = fs.readdirSync('./ratings').length
 
 // takes in session cookie, returns stringified json data
 function decryptCookie(data) {
@@ -60,27 +60,6 @@ function authUser(session) {
                     return
                 }
                 fs.readFile('./userData/' + user.username + '.json', (error, data) => {
-                    if (error) {
-                        resolve(undefined)
-                        return
-                    }
-                    resolve(JSON.parse(data))
-                })
-            })
-        } catch { resolve(undefined) }
-    })
-}
-
-// takes in username, returns user object if found, undefined if not
-function findUser(username) {
-    return new Promise((resolve) => {
-        try {
-            fs.access('./userData/' + username + '.json', (err) => {
-                if (err) {
-                    resolve(undefined)
-                    return
-                }
-                fs.readFile('./userData/' + username + '.json', (error, data) => {
                     if (error) {
                         resolve(undefined)
                         return
@@ -148,6 +127,27 @@ app.get('/profile', async (req, res) => {
 
     // otherwise, render page
     else { res.redirect('/login') }
+})
+
+app.get('/profile/:username', async (req, res) => {
+    const user = await authUser(req.cookies.session)
+    if (user) {
+        fs.readFile('./userData/' + req.params.username + '.json', (error, data) => {
+            if (error) { 
+                res.redirect('/index')
+                return
+            }
+
+            data = JSON.parse(data)
+
+            var reviews = []
+            for (let i = 0; i < data.ratings.length; i++) {
+                try { reviews.push(JSON.parse(fs.readFileSync('./ratings/' + data.ratings[i] + '.json'))) } catch { }
+            }
+
+            res.render('profile', { user: data, ratings: reviews })
+        })
+    } else { res.redirect('/index') }
 })
 
 app.get('/findClasses', async (req, res) => {

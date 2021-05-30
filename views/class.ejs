@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Class Grader</title>
+    <title>Class Grader - <%- data.className %> at <%- data.school %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -67,9 +67,7 @@
             <% for (let i=ratings.length - 1; i>= 0; i--) { %>
                 <div class="rating-card">
                     <div class="rating-header">
-                        <h2 class="user">
-                            <%-ratings[i].user%>'s Review
-                        </h2>
+                        <a href="/profile/<%- ratings[i].user %>" class="user"><%-ratings[i].user%>'s Review</a>
                         <p class="date">
                             <%-ratings[i].date%>
                         </p>
