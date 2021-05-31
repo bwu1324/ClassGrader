@@ -37,8 +37,8 @@ function signup() {
             if (response === 'error') {                            // alert when there is an issue or username exists
                 alert('There was an error with creating your account, we apologize for the inconvinience')
             } else if (response === 'exists') {
-                document.getElementById('usernameTooltip').textContent = "An account with this username already exists!"
-                document.getElementById('usernameTooltip').style.visibility = "visible"
+                document.getElementById('username-tooltip').textContent = "An account with this username already exists!"
+                document.getElementById('username-tooltip').style.visibility = "visible"
             } else {
                 document.cookie = "session=" + response + "; path=/; httpOnly: false";  // otherwise, set session cookie and redirect to profile
                 window.location.replace('../profile')
