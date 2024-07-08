@@ -27,7 +27,7 @@
     ```
     Change `8080:8080` to `8080:<YOUR DESIRED PORT>` if you'd like to change the port the application listens on
 3. Access the application at `localhost:8080`
-* Note: You can remove all `.json` files (not folders) in the `./data` directory to remove the example data.
+* Note: You can copy the `example_data` folder to the `./data` directory to use example data.
   
 ## Developing Locally
 
