@@ -1,4 +1,4 @@
 node_modules
-classes/*
-ratings/*
-userData/*
+data/classes/*
+data/ratings/*
+data/userData/*

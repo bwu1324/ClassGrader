@@ -7,7 +7,7 @@ const fs = require('fs')
 
 const secret = '0439868ec28dab59' //crypto.randomBytes(16)          // generate random server secret key for encrypting cookies
 
-var ratingCount = fs.readdirSync('./ratings').length
+var ratingCount = fs.readdirSync('./data/ratings').length
 
 // takes in session cookie, returns stringified json data
 function decryptCookie(data) {
@@ -40,7 +40,7 @@ function encryptCookie(data) {
 
 // takes in username, returns session cookie
 function createCookie(user) {
-    const data = JSON.parse(fs.readFileSync('./userData/' + user + '.json'))
+    const data = JSON.parse(fs.readFileSync('./data/userData/' + user + '.json'))
     const userData = {
         username: data.username,
         hash: data.hash
@@ -53,12 +53,12 @@ function authUser(session) {
     return new Promise((resolve) => {
         try {
             const user = JSON.parse(decryptCookie(session))
-            fs.access('./userData/' + user.username + '.json', (err) => {
+            fs.access('./data/userData/' + user.username + '.json', (err) => {
                 if (err) {
                     resolve(undefined)
                     return
                 }
-                fs.readFile('./userData/' + user.username + '.json', (error, data) => {
+                fs.readFile('./data/userData/' + user.username + '.json', (error, data) => {
                     if (error) {
                         resolve(undefined)
                         return
@@ -122,7 +122,7 @@ app.get('/profile', async (req, res) => {
     if (user) {
         var reviews = []
         for (let i = 0; i < user.ratings.length; i++) {
-            try { reviews.push(JSON.parse(fs.readFileSync('./ratings/' + user.ratings[i] + '.json'))) } catch { }
+            try { reviews.push(JSON.parse(fs.readFileSync('./data/ratings/' + user.ratings[i] + '.json'))) } catch { }
         }
 
         res.render('profile', { user: user, ratings: reviews })
@@ -135,7 +135,7 @@ app.get('/profile', async (req, res) => {
 app.get('/profile/:username', async (req, res) => {
     const user = await authUser(req.cookies.session)
     if (user) {
-        fs.readFile('./userData/' + req.params.username + '.json', (error, data) => {
+        fs.readFile('./data/userData/' + req.params.username + '.json', (error, data) => {
             if (error) { 
                 res.redirect('/index')
                 return
@@ -145,7 +145,7 @@ app.get('/profile/:username', async (req, res) => {
 
             var reviews = []
             for (let i = 0; i < data.ratings.length; i++) {
-                try { reviews.push(JSON.parse(fs.readFileSync('./ratings/' + data.ratings[i] + '.json'))) } catch { }
+                try { reviews.push(JSON.parse(fs.readFileSync('./data/ratings/' + data.ratings[i] + '.json'))) } catch { }
             }
 
             res.render('profile', { user: data, ratings: reviews })
@@ -156,9 +156,9 @@ app.get('/profile/:username', async (req, res) => {
 app.get('/findClasses', async (req, res) => {
     var found = []
     if (req.query.school) {
-        var classes = fs.readdirSync('./classes')
+        var classes = fs.readdirSync('./data/classes')
         for (let i = 0; i < classes.length; i++) {
-            var thisClass = JSON.parse(fs.readFileSync('./classes/' + classes[i]))
+            var thisClass = JSON.parse(fs.readFileSync('./data/classes/' + classes[i]))
 
             if (thisClass.school === req.query.school) {
                 thisClass.link = classes[i].slice(0, -5)
@@ -197,7 +197,7 @@ app.get('/newClass', async (req, res) => {
 
 app.get('/classes/:id', (req, res) => {
     if (req.params.id.length === 64) {
-        fs.readFile('./classes/' + req.params.id + '.json', async (error, data) => {
+        fs.readFile('./data/classes/' + req.params.id + '.json', async (error, data) => {
             if (!error) {
                 data = JSON.parse(data)
             } else {
@@ -209,7 +209,7 @@ app.get('/classes/:id', (req, res) => {
             try {
                 for (let i = 0; i < data.ratings.length; i++) {
                     try {
-                        var rating = fs.readFileSync('./ratings/' + data.ratings[i] + '.json')
+                        var rating = fs.readFileSync('./data/ratings/' + data.ratings[i] + '.json')
                         ratings.push(JSON.parse(rating))
                     } catch { }
                 }
@@ -230,7 +230,7 @@ app.post('/login', async (req, res) => {
     const data = req.body
 
     // read the file, if error, it doesn't exist, send fail
-    fs.readFile('./userData/' + data.username + '.json', async (err, user) => {
+    fs.readFile('./data/userData/' + data.username + '.json', async (err, user) => {
         if (err) {
             res.send('fail')
             return
@@ -257,7 +257,7 @@ app.post('/signup', (req, res) => {
     const data = req.body
 
     // read the file, if error, it doesn't exist, new user can be created
-    fs.access('./userData/' + data.username + '.json', async (err) => {
+    fs.access('./data/userData/' + data.username + '.json', async (err) => {
         if (err) {
             try {
                 // hash the password
@@ -272,7 +272,7 @@ app.post('/signup', (req, res) => {
                 }
 
                 // save user data,  apologize if things go wrong
-                fs.writeFile('./userData/' + data.username + '.json', JSON.stringify(newUser), (error) => {
+                fs.writeFile('./data/userData/' + data.username + '.json', JSON.stringify(newUser), (error) => {
                     if (error) {
                         res.send('error')
                     }
@@ -297,7 +297,7 @@ app.post('/newClass', async (req, res) => {
 
         var classID = sha(data.school + data.class + data.teacher)
         // read the file, if error, it doesn't exist, new user can be created
-        fs.access('./classes/' + classID + '.json', async (err) => {
+        fs.access('./data/classes/' + classID + '.json', async (err) => {
             if (err) {
                 var newClass = {
                     school: data.school,
@@ -307,7 +307,7 @@ app.post('/newClass', async (req, res) => {
                     rating: 0
                 }
 
-                fs.writeFile('./classes/' + classID + '.json', JSON.stringify(newClass), (error) => {
+                fs.writeFile('./data/classes/' + classID + '.json', JSON.stringify(newClass), (error) => {
                     if (error) {
                         res.send('fail')
                         return
@@ -326,7 +326,7 @@ app.post('/classes/:id', async (req, res) => {
     // check if user has valid session cookie
     const user = await authUser(req.cookies.session)
     if (user) {
-        fs.readFile('./classes/' + req.params.id + '.json', (error, data) => {
+        fs.readFile('./data/classes/' + req.params.id + '.json', (error, data) => {
             if (error) {
                 res.send('fail')
                 return
@@ -347,9 +347,9 @@ app.post('/classes/:id', async (req, res) => {
             newRating.user = user.username
 
             try {
-                fs.writeFileSync('./ratings/' + ratingCount + '.json', JSON.stringify(newRating))
-                fs.writeFileSync('./classes/' + req.params.id + '.json', JSON.stringify(data))
-                fs.writeFileSync('./userData/' + user.username + '.json', JSON.stringify(user))
+                fs.writeFileSync('./data/ratings/' + ratingCount + '.json', JSON.stringify(newRating))
+                fs.writeFileSync('./data/classes/' + req.params.id + '.json', JSON.stringify(data))
+                fs.writeFileSync('./data/userData/' + user.username + '.json', JSON.stringify(user))
 
                 ratingCount += 1
                 res.send('success')

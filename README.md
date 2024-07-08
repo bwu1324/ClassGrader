@@ -2,7 +2,7 @@
 
 ## About
 
-10 Pi Hacks 2021 submission. A web application for reviewing school courses. 
+10 Pi Hacks 2021 submission. A web application for students write and view reviews for school courses. 
 
 ## Built With
 
@@ -23,7 +23,25 @@
     ```
 2. Start the container
     ```
-    docker run -p 8080:8080 classgrader
+    docker run -v ./data:/app/data -p 8080:8080 classgrader
     ```
     Change `8080:8080` to `8080:<YOUR DESIRED PORT>` if you'd like to change the port the application listens on
 3. Access the application at `localhost:8080`
+* Note: You can remove all `.json` files (not folders) in the `./data` directory to remove the example data.
+  
+## Developing Locally
+
+### Prerequisites
+
+* Node.js (Tested with Node 18)
+
+### Starting the Application
+
+1. Install dependencies
+    ```bash
+    npm install
+    ```
+2. Start server
+    ```bash
+    node server.js
+    ```
