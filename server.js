@@ -81,6 +81,10 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// Redirect to homepage
+app.get('/', async (req, res) => {
+    res.redirect('/index');
+})
 
 // homepage
 app.get('/index', async (req, res) => {
